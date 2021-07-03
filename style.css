@@ -1,0 +1,193 @@
+*,
+*::before,
+*::after{
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    font-size: 10px
+}
+
+:root{
+    --cell-size: 135px;
+    --mark-size: calc(var(--cell-size) * .9);
+    --border-clr: rgb(19, 19, 19);
+}
+
+@media(max-width: 700px){
+    :root{
+        --cell-size: 100px;
+    }
+    *,
+    *::before,
+    *::after{
+        font-size: 8px
+    }
+}
+
+
+.board{
+    width: 100vw;
+    height: 100vh;
+    display: -ms-grid;
+    display: -webkit-grid;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(3, auto);
+}
+
+.cell{
+    position: relative;
+    width: var(--cell-size);
+    height: var(--cell-size);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    border: 1px solid var(--border-clr);
+    cursor: pointer;
+}
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3){
+    border-top: none;
+}
+.cell:last-child,
+.cell:nth-child(7),
+.cell:nth-child(8){
+    border-bottom: none;
+}
+.cell:nth-child(3n + 3){
+    border-right: none;
+}
+.cell:nth-child(3n + 1){
+    border-left: none;
+}
+
+.winning-message{
+    --text-clr: #fff;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.9);
+    display: none;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    color: var(--text-clr);
+    font-weight: 400;
+    font-style: normal;
+}
+.text{
+    font-size: 5rem;
+}
+.winning-message.show{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.winning-message button{
+    --bg-clr: #fff;
+
+    font-size: 2.5rem;
+    padding: 20px;
+    background-color: var(--bg-clr);
+    border: 1px solid var(--border-clr);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--border-clr);
+    -webkit-transition: all 450ms ease;
+    -moz-transition: all 450ms ease;
+    -ms-transition: all 450ms ease;
+    -o-transition: all 450ms ease;
+    transition: all 450ms ease;
+}
+
+.winning-message button:hover{
+    color: var(--bg-clr);
+    background-color: var(--border-clr);
+    border: 1px solid var(--bg-clr);
+}
+
+.cell.x,
+.cell.circle{
+    cursor: not-allowed;
+}
+
+.cell.x::before,
+.cell.x::after,
+.cell.circle::before{
+    background-color: var(--border-clr);
+}
+
+
+.cell.x::before,
+.cell.x::after{
+    position: absolute;
+    content: '';
+    width: calc(var(--mark-size) * .2);
+    height: var(--mark-size);
+}
+
+.cell.x::before{
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.cell.x::after{
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.cell.circle::before{
+    width: var(--mark-size);
+    height: var(--mark-size);
+}
+.cell.circle::after {
+    width: calc(var(--mark-size) * .6);
+    height: calc(var(--mark-size) * .6);
+    background-color: #fff;
+}
+
+.cell.circle::before,
+.cell.circle::after{
+    position: absolute;
+    content: '';
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+}
+
+
+
+
+
+
+
+
+
